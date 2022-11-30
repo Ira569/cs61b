@@ -55,6 +55,13 @@ public  class NBody{
             StdDraw.pause(waitTimeMilliseconds);
             time +=dt;
         }
+        StdOut.printf("%d\n", pArrey.length);
+        StdOut.printf("%.2e\n", Radius);
+    for (int i = 0; i < pArrey.length; i++) {
+        StdOut.printf("%11.4e %11.4e %11.4e %11.4e %11.4e %12s\n",
+        pArrey[i].xxPos, pArrey[i].yyPos, pArrey[i].xxVel,
+        pArrey[i].yyVel, pArrey[i].mass, pArrey[i].imgFileName);   
+}
 
     }
 
