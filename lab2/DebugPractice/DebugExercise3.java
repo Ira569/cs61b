@@ -9,6 +9,9 @@ public class DebugExercise3 {
             String foodType = in.readString();
             double cost = in.readDouble();
             int numAvailable = in.readInt();
+            if (numAvailable < 0) {
+                numAvailable = -numAvailable;
+            }
             if (foodType.equals("turnip")) {
                 int newTotal = totalTurnips + numAvailable;
                 totalTurnips = newTotal;
@@ -17,7 +20,7 @@ public class DebugExercise3 {
         }
         return totalTurnips;
     }
-
+    /**  MAIN Function.*/
     public static void main(String[] args) {
         In in = new In("foods.csv");
         System.out.println(countTurnips(in));
