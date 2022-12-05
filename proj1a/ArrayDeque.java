@@ -19,6 +19,7 @@ public class ArrayDeque<T> {
         T[] items2 = (T[]) new Object[size2];
         for (int i = 0, j = 0; i < size; i++, j++) {
             items2[j] = items[(nextFirst + 1 + i) % items.length];
+            items[(nextFirst + 1 + i) % items.length] = null;
         }
         nextFirst = items2.length - 1;
         nextLast = size;
