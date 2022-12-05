@@ -50,22 +50,19 @@ public class ArrayDequeTest {
     public  void  resizeTest() {
         ArrayDeque<String> arrayD = new ArrayDeque();
         int N = 8;
-        for (int i=0;i<N;i++) {
+        for (int i = 0; i < N; i++) {
             arrayD.addFirst("a");
         }
-        for (int i=0;i<N-1;i++) {
+        for (int i = 0; i < N - 1; i++) {
             arrayD.removeFirst();
         }
 
         N = 64;
-        for (int i=0;i<N;i++) {
+        for (int i = 0; i < N; i++) {
             arrayD.addFirst("a");
         }
-        for (int i=0;i<N-1;i++) {
+        for (int i = 0; i < N - 1; i++) {
             arrayD.removeFirst();
         }
-
-
-
     }
 }
