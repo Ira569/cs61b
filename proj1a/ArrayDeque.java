@@ -1,9 +1,12 @@
-
+/** a data structure that using array to achieve deque.*/
 public class ArrayDeque<T> {
-
+    /** index before the first item.*/
     private int nextFirst;
+    /** index after the last item.*/
     private int nextLast;
+    /** size of items.*/
     private int  size;
+    /** items.*/
     private  T[] items;
     public ArrayDeque() {
         nextFirst = 0;
@@ -12,33 +15,33 @@ public class ArrayDeque<T> {
         items = (T[]) new Object[8];
     }
     /** resize the array.*/
-    private void resize(int size2){
-        T[] items2 = (T[])new Object[size2];
-        for(int i=0,j=0;i<size;i++,j++) {
-            items2[j]=items[(nextFirst+1+i)%items.length];
+    private void resize(int size2) {
+        T[] items2 = (T[]) new Object[size2];
+        for (int i = 0, j = 0; i < size; i++, j++) {
+            items2[j] = items[(nextFirst + 1 + i) % items.length];
         }
-        nextFirst = items2.length-1;
+        nextFirst = items2.length - 1;
         nextLast = size;
         items = items2;
-   }
+    }
 
 
 
     public void addFirst(T item) {
-        if (size==items.length){
-            resize(2*size);
+        if (size == items.length) {
+            resize(2 * size);
         }
-        items[nextFirst]=item;
-        nextFirst=(nextFirst-1+items.length)%items.length;
+        items[nextFirst] = item;
+        nextFirst = (nextFirst - 1 + items.length) % items.length;
         size += 1;
     }
 
     public void addLast(T item) {
-        if (size==items.length){
-            resize(2*size);
+        if (size == items.length) {
+            resize(2 * size);
         }
-        items[nextLast]=item;
-        nextLast=(nextLast+1)%items.length;
+        items[nextLast] = item;
+        nextLast = (nextLast + 1) % items.length;
         size += 1;
     }
 
@@ -51,37 +54,47 @@ public class ArrayDeque<T> {
         return size;
     }
     public void printDeque() {
-        for (int i=0;i<size;i++) {
-            System.out.print(items[(nextFirst+1+i)% items.length]+" ");
+        for (int i = 0; i < size; i++) {
+            System.out.print(items[(nextFirst + 1 + i) % items.length] + " ");
         }
     }
 
     public T  removeFirst() {
-        while (size>=16 && size/items.length<0.25){
-            resize(items.length/2);
+        if (size == 0) {
+            return  null;
         }
-        T item = items[(nextFirst+1)%items.length];
-        items[(nextFirst+1)%items.length] = null;
-        nextFirst =(nextFirst+1)%items.length;
+        while (size >= 16 && (double) size / items.length < 0.25) {
+            resize(items.length / 2);
+        }
+        int firstItem = (nextFirst + 1) % items.length;
+        T item = items[firstItem];
+        items[firstItem] = null;
+        nextFirst = firstItem;
         size -= 1;
         return item;
     }
 
     public T removeLast() {
-        while (size>=16 && size/items.length<0.25){
-            resize(items.length/2);
+        if (size == 0) {
+            return  null;
         }
-        T item = items[(nextLast-1+items.length)%items.length];
-        items[(nextLast-1+items.length)%items.length] = null;
-        nextLast = (nextLast-1+items.length)%items.length;
+        while (size >= 16 && (double) size / items.length < 0.25) {
+            resize(items.length / 2);
+        }
+        int lastItem = (nextLast - 1 + items.length) % items.length;
+        T item = items[lastItem];
+        items[lastItem] = null;
+        nextLast = lastItem;
         size -= 1;
         return item;
     }
+    /** get the index item in arrays.*/
     public T get(int index) {
-        if(index<0||index>=size) {
+        if (index < 0 || index >= size) {
             return null;
         }
-        return items[(nextFirst+1+index)%items.length];
+        else {
+            return items[(nextFirst + 1 + index) % items.length];
+        }
     }
-
 }

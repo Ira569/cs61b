@@ -1,10 +1,10 @@
 public class  LinkedListDeque<T> {
     private class StuffNode {
-        public T item;
-        public StuffNode next;
-        public StuffNode prev;
+        private T item;
+        private StuffNode next;
+        private StuffNode prev;
 
-        public StuffNode(T i, StuffNode n,StuffNode p) {
+        StuffNode(T i, StuffNode n,StuffNode p) {
             item = i;
             next = n;
             prev=p;
@@ -12,9 +12,9 @@ public class  LinkedListDeque<T> {
         }
     }
 
-    public int size;
-    public StuffNode sentFront;
-    public StuffNode sentBack;
+    private int size;
+    private StuffNode sentFront;
+    private StuffNode sentBack;
 
     public LinkedListDeque() {
         sentFront=new StuffNode(null, null,null);
@@ -84,12 +84,14 @@ public class  LinkedListDeque<T> {
         return ptr.next.item;
     }
 
-    public T getRecursivehelper(StuffNode ptr,int index){
-        if(index==0)
+    private T getRecursivehelper(StuffNode ptr,int index){
+        if(index==0) {
             return ptr.next.item;
-        else
-            {ptr=ptr.next;
-            return getRecursivehelper(ptr,index-1);}
+        }
+        else {
+            ptr=ptr.next;
+            return getRecursivehelper(ptr,index-1);
+        }
     }
     public T getRecursive(int index){
         if(index<0||index>=size)
