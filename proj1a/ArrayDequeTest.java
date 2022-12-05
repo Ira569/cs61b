@@ -49,24 +49,23 @@ public class ArrayDequeTest {
     @Test
     public  void  resizeTest() {
         ArrayDeque<String> arrayD = new ArrayDeque();
-        arrayD.addFirst("a");
-        arrayD.addLast("b");
-        arrayD.addLast("c");
-        arrayD.addLast("d");
-        arrayD.addLast("e");
-        arrayD.addLast("f");
-        arrayD.addLast("g");
-        arrayD.addLast("h");
+        int N = 8;
+        for (int i=0;i<N;i++) {
+            arrayD.addFirst("a");
+        }
+        for (int i=0;i<N-1;i++) {
+            arrayD.removeFirst();
+        }
 
-        arrayD.addLast("a");
-        arrayD.addLast("b");
-        arrayD.addLast("c");
-        arrayD.addLast("d");
-        arrayD.addLast("e");
-        arrayD.addLast("f");
-        arrayD.addLast("g");
-        arrayD.addLast("h");
-        String expected = "abcdefgh abcdefgh";
+        N = 64;
+        for (int i=0;i<N;i++) {
+            arrayD.addFirst("a");
+        }
+        for (int i=0;i<N-1;i++) {
+            arrayD.removeFirst();
+        }
+
+
 
     }
 }
