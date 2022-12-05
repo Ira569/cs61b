@@ -63,14 +63,14 @@ public class ArrayDeque<T> {
         if (size == 0) {
             return  null;
         }
-        while (size >= 16 && (double) size / items.length < 0.25) {
-            resize(items.length / 2);
-        }
         int firstItem = (nextFirst + 1) % items.length;
         T item = items[firstItem];
         items[firstItem] = null;
         nextFirst = firstItem;
         size -= 1;
+        while (size >= 16 && (double) size / items.length < 0.25) {
+            resize(items.length / 2);
+        }
         return item;
     }
 
@@ -78,14 +78,14 @@ public class ArrayDeque<T> {
         if (size == 0) {
             return  null;
         }
-        while (size >= 16 && (double) size / items.length < 0.25) {
-            resize(items.length / 2);
-        }
         int lastItem = (nextLast - 1 + items.length) % items.length;
         T item = items[lastItem];
         items[lastItem] = null;
         nextLast = lastItem;
         size -= 1;
+        while (size >= 16 && (double) size / items.length < 0.25) {
+            resize(items.length / 2);
+        }
         return item;
     }
     /** get the index item in arrays.*/
