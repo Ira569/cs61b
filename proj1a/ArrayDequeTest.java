@@ -19,6 +19,7 @@ public class ArrayDequeTest {
         arrayD.removeFirst();
         String expected = "c a b d e g";
         System.out.println("\n" + expected);
+
     }
     @Test
     public  void  getTest() {
