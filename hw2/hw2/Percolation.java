@@ -20,6 +20,7 @@ public class Percolation {
         for (int i = 0; i< n; i++) {
             sites.union(i,N * N);
         }
+
         isOpen = new boolean[N * N];
 
 
@@ -33,27 +34,37 @@ public class Percolation {
             openNum += 1;
         }
         int pos = xyTo1D(row, col);
-        int up = xyTo1D(row - 1, col);
-        int down = xyTo1D(row + 1, col);
-        int left = xyTo1D(row, col-1);
-        int right = xyTo1D(row, col+1);
-        if(up >= 0 && up < n*n && isOpen[up]) {
-            sites.union(up,pos);
+        int near = 0;
+        if (row + 1 < n) {
+            near = xyTo1D(row + 1, col);
+            if(isOpen[near]) {
+                sites.union(near,pos);
+            }
         }
-        if( down >= 0 && down < n*n && isOpen[down]) {
-            sites.union(down,pos);
+        if (row - 1 >= 0) {
+            near = xyTo1D(row - 1, col);
+            if(isOpen[near]) {
+                sites.union(near,pos);
+            }
         }
-        if(left >= 0 && left < n*n && isOpen[left]) {
-            sites.union(left,pos);
+        if (col + 1 < n) {
+            near = xyTo1D(row, col + 1);
+            if(isOpen[near]) {
+                sites.union(near,pos);
+            }
         }
-        if(right >= 0 && right < n*n && isOpen[right]) {
-            sites.union(right,pos);
+        if (col - 1 >= 0) {
+            near = xyTo1D(row, col - 1);
+            if(isOpen[near]) {
+                sites.union(near,pos);
+            }
         }
 
-        if (row == n-1 && sites.connected(pos,n * n)) {
-            sites.union(pos, n * n + 1);
+        for (int i = 0; i< n; i++){
+            if (sites.connected(n * n - 1 - i,n * n)) {
+                sites.union(n * n - 1 - i, n * n + 1);
+            }
         }
-
 
     }      // open the site (row, col) if it is not open already
     public boolean isOpen(int row, int col) {
@@ -74,7 +85,6 @@ public class Percolation {
             }
         }
         return false;*/
-
         return  isOpen(row, col) && sites.connected(xyTo1D(row, col), n * n);
     } // is the site (row, col) full?
     public int numberOfOpenSites() {
