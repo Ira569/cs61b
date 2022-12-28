@@ -22,7 +22,10 @@ public class Percolation {
         }
 
         isOpen = new boolean[N * N];
+        for (int i = 0; i< n; i++) {
+                sites.union(n * n - 1 - i, n * n + 1);
 
+        }
 
     }              // create N-by-N grid, with all sites initially blocked
     public void open(int row, int col) {
@@ -60,11 +63,7 @@ public class Percolation {
             }
         }
 
-        if (pos < n * n && pos >= n * n -n){
-            if (sites.connected(pos,n * n)) {
-                sites.union(pos, n * n + 1);
-            }
-        }
+
 
     }      // open the site (row, col) if it is not open already
     public boolean isOpen(int row, int col) {
