@@ -60,9 +60,9 @@ public class Percolation {
             }
         }
 
-        for (int i = 0; i< n; i++){
-            if (sites.connected(n * n - 1 - i,n * n)) {
-                sites.union(n * n - 1 - i, n * n + 1);
+        if (pos < n * n && pos >= n * n -n){
+            if (sites.connected(pos,n * n)) {
+                sites.union(pos, n * n + 1);
             }
         }
 
@@ -94,11 +94,11 @@ public class Percolation {
         return sites.connected(n * n, n * n + 1);
     }             // does the system percolate?
     public static void main(String[] args) {
-       /*PercolationStats pstats = new PercolationStats(100,10000,new PercolationFactory());
+       PercolationStats pstats = new PercolationStats(100,1000,new PercolationFactory());
        System.out.println(pstats.mean());
        System.out.println(pstats.stddev());
        System.out.println(pstats.confidenceLow());
-       System.out.println(pstats.confidenceHigh());8*/
+       System.out.println(pstats.confidenceHigh());
 
 
     }  // use for unit testing (not required)
