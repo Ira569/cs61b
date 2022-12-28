@@ -2,7 +2,7 @@ package hw2;
 import edu.princeton.cs.algs4.WeightedQuickUnionUF;
 
 public class Percolation {
-    private int n;
+    private  int n;
     private int openNum;
     private WeightedQuickUnionUF sites;
     private boolean[] isOpen;
@@ -37,7 +37,7 @@ public class Percolation {
             openNum += 1;
         }
         int pos = xyTo1D(row, col);
-        int near = 0;
+        int near;
         if (row + 1 < n) {
             near = xyTo1D(row + 1, col);
             if(isOpen[near]) {
@@ -73,17 +73,6 @@ public class Percolation {
         return isOpen[xyTo1D(row, col)];
     } // is the site (row, col) open?
     public boolean isFull(int row, int col) {
-        /*if (row < 0 || col < 0 || row > this.n - 1 || col > this.n-1) {
-            throw new java.lang.IndexOutOfBoundsException();
-        }
-        if (isOpen(row, col)) {
-            for (int i = 0; i < n; i += 1) {
-                if (sites.connected(xyTo1D(row, col), i)) {
-                    return true;
-                }
-            }
-        }
-        return false;*/
         return  isOpen(row, col) && sites.connected(xyTo1D(row, col), n * n);
     } // is the site (row, col) full?
     public int numberOfOpenSites() {
@@ -93,11 +82,10 @@ public class Percolation {
         return sites.connected(n * n, n * n + 1);
     }             // does the system percolate?
     public static void main(String[] args) {
-       PercolationStats pstats = new PercolationStats(100,1000,new PercolationFactory());
-       System.out.println(pstats.mean());
-       System.out.println(pstats.stddev());
-       System.out.println(pstats.confidenceLow());
-       System.out.println(pstats.confidenceHigh());
+       PercolationStats test = new PercolationStats(100,1000,new PercolationFactory());
+       System.out.println(test.mean());
+       System.out.println(test.stddev());
+
 
 
     }  // use for unit testing (not required)
