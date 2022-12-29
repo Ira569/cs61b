@@ -9,7 +9,7 @@ public class Percolation {
     private boolean[] isOpen;
 
     private int xyTo1D(int r, int c) {
-       return r * this.n + c;
+        return r * this.n + c;
     }
     public Percolation(int N) {
         if (N <= 0) {
@@ -17,21 +17,21 @@ public class Percolation {
         }
         this.n = N;
         openNum = 0;
-        sites = new WeightedQuickUnionUF(N * N + 2);// N*N represent top, N*N+1 represent bottom
+        sites = new WeightedQuickUnionUF(N * N + 2); // N*N represent top, N*N+1 represent bottom
         sites2 = new WeightedQuickUnionUF(N * N + 2);
-        for (int i = 0; i< n; i++) {
-            sites.union(i,N * N);
-            sites2.union(i,N * N);
+        for (int i = 0; i < n; i++) {
+            sites.union(i, N * N);
+            sites2.union(i, N * N);
         }
 
         isOpen = new boolean[N * N];
-        for (int i = 0; i< n; i++) {
+        for (int i = 0; i < n; i++) {
             sites.union(n * n - 1 - i, n * n + 1);
         }
 
     }              // create N-by-N grid, with all sites initially blocked
     public void open(int row, int col) {
-        if (row < 0 || col < 0 || row > this.n - 1 || col > this.n-1) {
+        if (row < 0 || col < 0 || row > this.n - 1 || col > this.n - 1) {
             throw new java.lang.IndexOutOfBoundsException();
         }
         if (!isOpen(row, col)) {
@@ -42,30 +42,30 @@ public class Percolation {
         int near;
         if (row + 1 < n) {
             near = xyTo1D(row + 1, col);
-            if(isOpen[near]) {
-                sites.union(near,pos);
-                sites2.union(near,pos);
+            if (isOpen[near]) {
+                sites.union(near, pos);
+                sites2.union(near, pos);
             }
         }
         if (row - 1 >= 0) {
             near = xyTo1D(row - 1, col);
-            if(isOpen[near]) {
-                sites.union(near,pos);
-                sites2.union(near,pos);
+            if (isOpen[near]) {
+                sites.union(near, pos);
+                sites2.union(near, pos);
             }
         }
         if (col + 1 < n) {
             near = xyTo1D(row, col + 1);
-            if(isOpen[near]) {
-                sites.union(near,pos);
-                sites2.union(near,pos);
+            if (isOpen[near]) {
+                sites.union(near, pos);
+                sites2.union(near, pos);
             }
         }
         if (col - 1 >= 0) {
             near = xyTo1D(row, col - 1);
-            if(isOpen[near]) {
-                sites.union(near,pos);
-                sites2.union(near,pos);
+            if (isOpen[near]) {
+                sites.union(near, pos);
+                sites2.union(near, pos);
             }
         }
 
@@ -73,7 +73,7 @@ public class Percolation {
 
     }      // open the site (row, col) if it is not open already
     public boolean isOpen(int row, int col) {
-        if (row < 0 || col < 0 || row > this.n - 1 || col > this.n-1) {
+        if (row < 0 || col < 0 || row > this.n - 1 || col > this.n - 1) {
             throw new java.lang.IndexOutOfBoundsException();
         }
         return isOpen[xyTo1D(row, col)];
@@ -86,14 +86,14 @@ public class Percolation {
     }          // number of open sites
     public boolean percolates() {
         if (n == 1) {
-            return isOpen(0,0);
+            return isOpen(0, 0);
         }
         return sites.connected(n * n, n * n + 1);
     }             // does the system percolate?
     public static void main(String[] args) {
-       PercolationStats test = new PercolationStats(100,1000,new PercolationFactory());
-       System.out.println(test.mean());
-       System.out.println(test.stddev());
+        PercolationStats test = new PercolationStats(100, 1000, new PercolationFactory());
+        System.out.println(test.mean());
+        System.out.println(test.stddev());
 
 
 
