@@ -5,6 +5,7 @@ public class Percolation {
     private int n;
     private int openNum;
     private WeightedQuickUnionUF sites;
+    private WeightedQuickUnionUF sites2;
     private boolean[] isOpen;
 
     private int xyTo1D(int r, int c) {
@@ -17,14 +18,15 @@ public class Percolation {
         this.n = N;
         openNum = 0;
         sites = new WeightedQuickUnionUF(N * N + 2);// N*N represent top, N*N+1 represent bottom
+        sites2 = new WeightedQuickUnionUF(N * N + 2);
         for (int i = 0; i< n; i++) {
             sites.union(i,N * N);
+            sites2.union(i,N * N);
         }
 
         isOpen = new boolean[N * N];
         for (int i = 0; i< n; i++) {
-                sites.union(n * n - 1 - i, n * n + 1);
-
+            sites.union(n * n - 1 - i, n * n + 1);
         }
 
     }              // create N-by-N grid, with all sites initially blocked
@@ -42,24 +44,28 @@ public class Percolation {
             near = xyTo1D(row + 1, col);
             if(isOpen[near]) {
                 sites.union(near,pos);
+                sites2.union(near,pos);
             }
         }
         if (row - 1 >= 0) {
             near = xyTo1D(row - 1, col);
             if(isOpen[near]) {
                 sites.union(near,pos);
+                sites2.union(near,pos);
             }
         }
         if (col + 1 < n) {
             near = xyTo1D(row, col + 1);
             if(isOpen[near]) {
                 sites.union(near,pos);
+                sites2.union(near,pos);
             }
         }
         if (col - 1 >= 0) {
             near = xyTo1D(row, col - 1);
             if(isOpen[near]) {
                 sites.union(near,pos);
+                sites2.union(near,pos);
             }
         }
 
@@ -73,12 +79,15 @@ public class Percolation {
         return isOpen[xyTo1D(row, col)];
     } // is the site (row, col) open?
     public boolean isFull(int row, int col) {
-        return  isOpen(row, col) && sites.connected(xyTo1D(row, col), n * n);
+        return  isOpen(row, col) && sites2.connected(xyTo1D(row, col), n * n);
     } // is the site (row, col) full?
     public int numberOfOpenSites() {
         return openNum;
     }          // number of open sites
     public boolean percolates() {
+        if (n == 1) {
+            return isOpen(0,0);
+        }
         return sites.connected(n * n, n * n + 1);
     }             // does the system percolate?
     public static void main(String[] args) {
