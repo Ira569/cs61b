@@ -2,7 +2,7 @@ package hw2;
 import edu.princeton.cs.algs4.WeightedQuickUnionUF;
 
 public class Percolation {
-    private  int n;
+    private int n;
     private int openNum;
     private WeightedQuickUnionUF sites;
     private boolean[] isOpen;
