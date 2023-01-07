@@ -26,9 +26,10 @@ public class HashTableVisualizer {
             // oomies.add(ComplexOomage.randomComplexOomage());
 
             param = new ArrayList<>();
-            for(int j = 0; j <= i; j++) {
-                param.add(1);
+            for(int j = 0; j < i; j++) {
+                param.add(0);
             }
+            param.add(1);
             oomies.add(new ComplexOomage(param));
         }
         // 256 = 2^8 因为int只有32字节，2^32以上就没法表示了

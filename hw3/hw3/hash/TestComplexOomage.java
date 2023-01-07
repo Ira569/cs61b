@@ -42,14 +42,15 @@ public class TestComplexOomage {
         List<Oomage> deadlyList = new ArrayList<>();
 
         // Your code here.
-        int N = 10000;
+        int N = 10;
         List<Integer> param = new ArrayList<>();
         // 256 = 2^8 因为int只有32字节，2^32以上就没法表示了
         for (int i = 0; i < N; i += 1) {
             param = new ArrayList<>();
-            for(int j = 0; j <= i; j++) {
-                param.add(1);
+            for(int j = 0; j < i; j++) {
+                param.add(0);
             }
+            param.add(1);
             deadlyList.add(new ComplexOomage(param));
         }
 
