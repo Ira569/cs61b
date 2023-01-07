@@ -20,9 +20,18 @@ public class HashTableVisualizer {
 
         HashTableDrawingUtility.setScale(scale);
         List<Oomage> oomies = new ArrayList<>();
+        List<Integer> param = new ArrayList<>();
         for (int i = 0; i < N; i += 1) {
-           oomies.add(SimpleOomage.randomSimpleOomage());
+           //oomies.add(SimpleOomage.randomSimpleOomage());
+            // oomies.add(ComplexOomage.randomComplexOomage());
+
+            param = new ArrayList<>();
+            for(int j = 0; j <= i; j++) {
+                param.add(1);
+            }
+            oomies.add(new ComplexOomage(param));
         }
+        // 256 = 2^8 因为int只有32字节，2^32以上就没法表示了
         visualize(oomies, M, scale);
     }
 
