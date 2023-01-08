@@ -35,7 +35,14 @@ public class MergeSort {
     private static <Item extends Comparable> Queue<Queue<Item>>
             makeSingleItemQueues(Queue<Item> items) {
         // Your code here!
-        return null;
+        Queue<Queue<Item>> queues = new Queue<Queue<Item>>();
+        while (!items.isEmpty()) {
+            Queue<Item> q = new Queue<Item>();
+            q.enqueue(items.dequeue());
+            queues.enqueue(q);
+        }
+
+        return queues;
     }
 
     /**
@@ -54,13 +61,69 @@ public class MergeSort {
     private static <Item extends Comparable> Queue<Item> mergeSortedQueues(
             Queue<Item> q1, Queue<Item> q2) {
         // Your code here!
-        return null;
+        Queue<Item> q = new Queue<>();
+        while(!q1.isEmpty() || !q2.isEmpty()) {
+            q.enqueue(getMin(q1,q2));
+        }
+        return q;
     }
 
     /** Returns a Queue that contains the given items sorted from least to greatest. */
     public static <Item extends Comparable> Queue<Item> mergeSort(
             Queue<Item> items) {
         // Your code here!
-        return items;
+        Queue <Queue<Item>> queues = makeSingleItemQueues(items);
+        while (queues.size() > 1) {
+            int length = queues.size();
+            Queue <Queue<Item>> queues2 = new Queue <Queue<Item>>();
+            for (int i = 0; i <= length - 2; i += 2){
+                Queue<Item>q1 = queues.dequeue();
+                Queue<Item>q2 = queues.dequeue();
+                queues2.enqueue(mergeSortedQueues(q1,q2));
+            }
+            if(!queues.isEmpty()) {
+                queues2.enqueue(queues.dequeue());
+            }
+            queues = queues2;
+        }
+        return queues.dequeue();
+    }
+
+
+
+    public static void main(String[] args) {
+        Queue<String> students = new Queue<String>();
+        students.enqueue("Alice");
+        students.enqueue("Vanessa");
+        students.enqueue("Ethan");
+        students.enqueue("Boy");
+        students.enqueue("Coy");
+        students.enqueue("Doy");
+        students.enqueue("Eoy");
+        students.enqueue("Foy");
+        students.enqueue("Goy");
+        int length = students.size();
+        for(int i = 0; i < length; i++)
+        {
+            System.out.print(students.dequeue()+" ");
+        }
+        System.out.print("\n");
+
+        students.enqueue("Alice");
+        students.enqueue("Vanessa");
+        students.enqueue("Ethan");
+        students.enqueue("Boy");
+        students.enqueue("Coy");
+        students.enqueue("Doy");
+        students.enqueue("Eoy");
+        students.enqueue("Foy");
+        students.enqueue("GAy");
+        students = mergeSort(students);
+        length = students.size();
+        for(int i = 0; i < length; i++)
+        {
+            System.out.print(students.dequeue()+" ");
+        }
+        System.out.print("\n");
     }
 }
